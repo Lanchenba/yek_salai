@@ -9,7 +9,7 @@ function ClanFinder() {
     // Function to handle finding clans based on surname
     const findClan = () => {
         if (surname.trim() === "") {
-            setResult("Yumnak Ama Nambiyu.");
+            setResult("Yumnak Nambiyu.");
             return;
         }
 

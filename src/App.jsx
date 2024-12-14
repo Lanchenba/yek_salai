@@ -28,7 +28,7 @@ function App() {
                     zIndex: '1000', // Ensures the button is above other content
                 }}
             >
-                {showClanChecker ? "Switch to Clan Finder" : "Switch to Clan Checker"}
+                {showClanChecker ? "Yek-Salai Checker" : "Yek Thoknaba Checker"}
             </button>
 
             {/* Conditionally render the component based on state */}
