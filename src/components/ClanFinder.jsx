@@ -34,7 +34,7 @@ function ClanFinder() {
                 value={surname}
                 onChange={(e) => setSurname(e.target.value)} // Update surname state on input change
             />
-            <button onClick={findClan}>Search</button> {/* Trigger findClan function */}
+            <button className="button1" onClick={findClan}>Search</button> {/* Trigger findClan function */}
             <div className="result">{result}</div> {/* Display result */}
         </div>
     );

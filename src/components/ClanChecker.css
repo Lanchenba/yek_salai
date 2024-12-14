@@ -16,7 +16,7 @@ body {
     border: 1px solid #40534C;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 95%;
+    width: 100%;
     max-width: 400px;
     box-sizing: border-box;
 }
@@ -48,7 +48,7 @@ input {
 }
 
 /* Result text styling */
-.result {
+.result1 {
     margin-top: 20px;
     font-weight: bold;
     color: #ffffff; /* White text for better contrast */
