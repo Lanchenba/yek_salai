@@ -62,8 +62,8 @@ function ClanFinder() {
 // The yek function to search for the clan by surname
 function yekThoknaba(yumnak1, yumnak2) {
     // Convert input surnames to lowercase
-    yumnak1 = yumnak1.toLowerCase(); 
-    yumnak2 = yumnak2.toLowerCase(); 
+    yumnak1 = yumnak1.trim().toLowerCase(); 
+    yumnak2 = yumnak2.trim().toLowerCase(); 
 
     const yek1 = [];
     const yek2 = [];
