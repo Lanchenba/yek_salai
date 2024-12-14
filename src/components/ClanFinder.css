@@ -1,0 +1,93 @@
+/* Center-align the entire component */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ensure it covers the full viewport height */
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #1A3636;
+}
+
+.clan-finder {
+    text-align: center;
+    padding: 20px;
+    background-color: #677D6A;
+    border: 1px solid #40534C;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 95%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+/* Styling for input and button */
+input {
+    padding: 10px;
+    font-size: 16px;
+    margin: 10px 0;
+    width: calc(100% - 22px);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 12px;
+    font-size: 16px;
+    background-color: #bfb19d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%; /* Full width on mobile */
+}
+
+button:hover {
+    background-color: #a3928b;
+}
+
+/* Result text styling */
+.result {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #ffffff; /* White text for better contrast */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column; /* Optional: stack elements vertically */
+    }
+
+    .clan-finder {
+        padding: 15px; /* Reduce padding */
+        width: 90%; /* Adjust width */
+    }
+
+    input, button {
+        font-size: 14px; /* Slightly smaller font */
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        flex-direction: column; /* Ensure vertical alignment */
+        justify-content: center;
+    }
+
+    .clan-finder {
+        padding: 10px; /* Reduce padding further */
+        width: 95%;
+    }
+
+    input {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    button {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
