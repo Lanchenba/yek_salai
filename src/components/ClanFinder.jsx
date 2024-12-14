@@ -42,7 +42,7 @@ function ClanFinder() {
 
 // The yek function to search for the clan by surname
 function yek(yumnak) {
-    const data = yumnak.toLowerCase(); // Convert input surname to lowercase for case-insensitive search
+    const data = yumnak.trim().toLowerCase(); // Convert input surname to lowercase for case-insensitive search
     const yek = []; // Initialize an array to hold the matching clans
 
     // Iterate over the clansData object using Object.keys() to get the clan names
