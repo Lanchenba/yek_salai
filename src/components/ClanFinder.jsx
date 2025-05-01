@@ -1,59 +1,162 @@
-import React, { useState } from "react";
-import clansData from "../data/clans.json"; // Assuming clans data is correctly imported
-import "./ClanFinder.css"; // For styling
+import React, { useState, useEffect } from "react";
+import clansData from "../data/clans.json";
+import Autocomplete from "./Autocomplete";
+import "./ClanFinder.css";
 
 function ClanFinder() {
-    const [surname, setSurname] = useState(""); // State to store input surname
-    const [result, setResult] = useState(""); // State to store search result
+    const [surname, setSurname] = useState("");
+    const [result, setResult] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+    const [typeEffect, setTypeEffect] = useState(true);
+    const [displayText, setDisplayText] = useState("");
+    const [loadingDots, setLoadingDots] = useState("");
 
-    // Function to handle finding clans based on surname
+    // Terminal typing effect for header
+    useEffect(() => {
+        if (typeEffect) {
+            const text = "Enter your Yumnak to find your Yek-Salai:";
+            let i = 0;
+            const typing = setInterval(() => {
+                if (i < text.length) {
+                    setDisplayText(prev => prev + text.charAt(i));
+                    i++;
+                } else {
+                    clearInterval(typing);
+                    setTypeEffect(false);
+                }
+            }, 40);
+            return () => clearInterval(typing);
+        }
+    }, [typeEffect]);
+
+    // Loading animation
+    useEffect(() => {
+        if (loading) {
+            const symbols = ["|", "/", "-", "\\"];
+            let i = 0;
+            const loadingAnimation = setInterval(() => {
+                setLoadingDots(symbols[i % symbols.length]);
+                i++;
+            }, 150);
+            return () => clearInterval(loadingAnimation);
+        }
+    }, [loading]);
+
     const findClan = () => {
+        // Reset states
+        setError("");
+        setResult("");
+        
         if (surname.trim() === "") {
-            setResult("Yumnak Nambiyu.");
+            setError("ERROR: Yumnak input required");
             return;
         }
 
-        // Call the yek function to find clans
-        const clanResult = yek(surname);
+        // Show loading indicator
+        setLoading(true);
+        
+        // Simulate terminal processing
+        const delayTime = Math.floor(Math.random() * 500) + 500; // Random delay between 500-1000ms
+        setTimeout(() => {
+            try {
+                // Terminal "typing" sound effect
+                try {
+                    const audio = new Audio("data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU");
+                    audio.volume = 0.1;
+                    audio.play();
+                } catch (e) {
+                    // Ignore audio errors
+                }
+                
+                // Call the yek function to find clans
+                const clanResult = yek(surname);
+                
+                // Display the clans found or message if not found
+                if (clanResult.length > 0) {
+                    setResult(
+                        <div className="result-container">
+                            <div className="search-status">
+                                <span className="status-label">[STATUS]</span> MATCH FOUND
+                            </div>
+                            <div className="search-result">
+                                <span className="result-label">Yek-Salai:</span> 
+                                <span className="result-value">{clanResult.join(", ")}</span>
+                            </div>
+                        </div>
+                    );
+                } else {
+                    setError("ERROR 404: Yumnak not found in database");
+                }
+            } catch (err) {
+                setError("SYSTEM ERROR: Database query failed");
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        }, delayTime);
+    };
 
-        // Display the clans found or message if not found
-        if (clanResult.length > 0) {
-            setResult(<div><span style={{ fontWeight: 'bold', fontSize: '18px', color: '#c3f7df' }}>Yek-Salai:</span> {clanResult.join(", ")}</div>);
-        } else {
-            setResult("Not found!");
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            findClan();
         }
     };
 
     return (
         <div className="clan-finder">
-            <h1>Yek-salai Finder</h1>
-            <p>Enter your Yumnak to find your Yek-Salai:</p>
-            <input
-                type="text"
-                placeholder="Enter Yumnak"
-                value={surname}
-                onChange={(e) => setSurname(e.target.value)} // Update surname state on input change
-            />
-            <button className="button1" onClick={findClan}>Search</button> {/* Trigger findClan function */}
-            <div className="result">{result}</div> {/* Display result */}
+            <h1 className="title">Yek-salai Finder</h1>
+            <p className="description">
+                {displayText}
+                {typeEffect && <span className="cursor-blink"></span>}
+            </p>
+            
+            <div className="search-container">
+                <Autocomplete
+                    value={surname}
+                    onChange={setSurname}
+                    placeholder="Enter Yumnak"
+                />
+                <button 
+                    className="button1" 
+                    onClick={findClan}
+                    disabled={loading}
+                >
+                    {loading ? 
+                        <><span className="terminal-spinner">{loadingDots}</span> PROCESSING...</> : 
+                        "SEARCH DATABASE"}
+                </button>
+            </div>
+            
+            {error && <div className="error-message">{error}</div>}
+            {result && <div className="result">{result}</div>}
+            
+            <div className="hint">
+                <span className="hint-prompt">&gt; </span>
+                <span className="hint-text">Try samples: Huidrom, Laishram, Moirangthem</span>
+            </div>
+            
+            <div className="system-info">
+                <span className="memory-label">MEM:</span> 640K 
+                <span className="system-separator">|</span>
+                <span className="cpu-label">CPU:</span> Z80 4MHz
+            </div>
         </div>
     );
 }
 
 // The yek function to search for the clan by surname
 function yek(yumnak) {
-    const data = yumnak.trim().toLowerCase(); // Convert input surname to lowercase for case-insensitive search
-    const yek = []; // Initialize an array to hold the matching clans
+    const data = yumnak.trim().toLowerCase();
+    const yek = [];
 
-    // Iterate over the clansData object using Object.keys() to get the clan names
     Object.keys(clansData).forEach((clan) => {
-        // Check if any surname in the clan matches the input surname
         if (clansData[clan].some((surname) => surname.toLowerCase() === data)) {
-            yek.push(clan); // Add the clan to the result array if match found
+            yek.push(clan);
         }
     });
 
-    return yek; // Return the array of matching clans
+    return yek;
 }
 
-export default ClanFinder; // Export the ClanFinder component
+export default ClanFinder;
