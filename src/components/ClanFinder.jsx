@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import clansData from "../data/clans.json";
 import Autocomplete from "./Autocomplete";
 import "./ClanFinder.css";
@@ -11,6 +12,7 @@ function ClanFinder() {
     const [typeEffect, setTypeEffect] = useState(true);
     const [displayText, setDisplayText] = useState("");
     const [loadingDots, setLoadingDots] = useState("");
+    const navigate = useNavigate();
 
     // Terminal typing effect for header
     useEffect(() => {
@@ -103,6 +105,18 @@ function ClanFinder() {
         }
     };
 
+    const switchToChecker = () => {
+        // Play terminal sound
+        try {
+            const audio = new Audio("data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU");
+            audio.volume = 0.1;
+            audio.play();
+        } catch (e) {
+            // Ignore audio errors
+        }
+        navigate('/checker');
+    };
+
     return (
         <div className="clan-finder">
             <h1 className="title">Yek-salai Finder</h1>
@@ -133,7 +147,16 @@ function ClanFinder() {
             
             <div className="hint">
                 <span className="hint-prompt">&gt; </span>
-                <span className="hint-text">Try samples: Huidrom, Laishram, Moirangthem</span>
+                <span className="hint-text">Try samples: Keisham, Yendrembam</span>
+            </div>
+            
+            <div className="switch-container">
+                <button 
+                    className="switch-button" 
+                    onClick={switchToChecker}
+                >
+                    <span className="switch-icon">⟹</span> YEK-THOKNABA CHECKER
+                </button>
             </div>
             
             <div className="system-info">
