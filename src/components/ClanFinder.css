@@ -395,6 +395,47 @@ body {
   margin: 0 2px;
 }
 
+/* Exciting animations for results */
+.animated-pop {
+  animation: pop-bounce 0.7s cubic-bezier(.36,1.56,.64,1) both;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes pop-bounce {
+  0% { transform: scale(0.7); opacity: 0; }
+  60% { transform: scale(1.15); opacity: 1; }
+  80% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.confetti {
+  font-size: 1.7em;
+  margin-left: 0.5em;
+  animation: confetti-fall 1.2s ease-in-out;
+  display: inline-block;
+}
+
+@keyframes confetti-fall {
+  0% { transform: translateY(-30px) rotate(-10deg); opacity: 0; }
+  60% { opacity: 1; }
+  100% { transform: translateY(0) rotate(10deg); opacity: 1; }
+}
+
+.excited-message {
+  margin-top: 0.5em;
+  font-size: 1.08em;
+  color: #009688;
+  font-weight: 600;
+  text-align: left;
+  animation: excited-fade-in 1.2s;
+}
+
+@keyframes excited-fade-in {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
 @media (max-width: 768px) {
     body {
         flex-direction: column; /* Optional: stack elements vertically */

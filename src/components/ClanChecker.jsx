@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Autocomplete from "./Autocomplete";
+import { surnameIndex } from "../utils/dataIndexer";
 import "./ClanChecker.css";
 
 function ClanChecker() {
@@ -18,18 +19,8 @@ function ClanChecker() {
     }
     setLoading(true);
     setTimeout(() => {
-      // Simulate clan compatibility check
-      // Replace with real logic
-      const clans = require("../data/clans.json");
-      let clanA = null, clanB = null;
-      Object.entries(clans).forEach(([clan, surnames]) => {
-        if (surnames.map(s => s.toLowerCase()).includes(surname1.trim().toLowerCase())) {
-          clanA = clan;
-        }
-        if (surnames.map(s => s.toLowerCase()).includes(surname2.trim().toLowerCase())) {
-          clanB = clan;
-        }
-      });
+      const clanA = surnameIndex[surname1.trim().toLowerCase()];
+      const clanB = surnameIndex[surname2.trim().toLowerCase()];
       setLoading(false);
       if (!clanA || !clanB) {
         setError("Could not find one or both clans. Please check your Yumnaks.");
@@ -44,7 +35,7 @@ function ClanChecker() {
           message: `Compatible: ${surname1} (${clanA}) and ${surname2} (${clanB}) are from different clans.`
         });
       }
-    }, 900);
+    }, 400);
   };
 
   // Helper for random pair
@@ -86,11 +77,19 @@ function ClanChecker() {
       </button>
       {error && <div className="checker-alert error"><span role="img" aria-label="error">❌</span> {error}</div>}
       {result && (
-        <div className={`checker-alert ${result.compatible ? "success" : "fail"}`}>
+        <div className={`checker-alert ${result.compatible ? "success animated-pop" : "fail animated-pop"}`}>
           {result.compatible ? (
-            <><span role="img" aria-label="ok">✅</span> {result.message}</>
+            <>
+              <span role="img" aria-label="ok">✅</span> {result.message}
+              <span className="confetti">🎊</span>
+              <div className="excited-message">Congratulations! You are compatible! <span role="img" aria-label="celebrate">💑</span></div>
+            </>
           ) : (
-            <><span role="img" aria-label="no">🚫</span> {result.message}</>
+            <>
+              <span role="img" aria-label="no">🚫</span> {result.message}
+              <span className="confetti">💔</span>
+              <div className="excited-message">Sorry, not compatible. <span role="img" aria-label="sad">😢</span></div>
+            </>
           )}
         </div>
       )}

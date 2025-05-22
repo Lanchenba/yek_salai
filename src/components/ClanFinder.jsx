@@ -45,8 +45,10 @@ function ClanFinder() {
       </button>
       {error && <div className="finder-alert error"><span role="img" aria-label="error">❌</span> {error}</div>}
       {result && (
-        <div className="finder-alert success">
+        <div className="finder-alert success animated-pop">
           <span role="img" aria-label="clan">🏷️</span> <strong>Clan:</strong> {result.clan}
+          <span className="confetti">🎉</span>
+          <div className="excited-message">You found your clan! <span role="img" aria-label="party">🥳</span></div>
         </div>
       )}
       <div className="finder-hint">Try: <span>{getRandomSample()}</span></div>

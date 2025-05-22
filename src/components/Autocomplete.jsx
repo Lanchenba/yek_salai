@@ -40,59 +40,61 @@ function Autocomplete({ value, onChange, placeholder }) {
     const getSuggestions = (input) => {
         const inputValue = input.trim().toLowerCase();
         const inputLength = inputValue.length;
-        
         return inputLength === 0 
             ? [] 
             : allSurnames.current.filter(surname => 
                 surname.toLowerCase().slice(0, inputLength) === inputValue
             ).slice(0, 5); // Limit to 5 suggestions
     };
-    
-    // Update suggestions when input changes
-    const handleChange = (e) => {
-        const userInput = e.target.value;
-        onChange(userInput);
-        
-        // Update suggestions
-        const filteredSuggestions = getSuggestions(userInput);
-        setSuggestions(filteredSuggestions);
-        setShowSuggestions(true);
-    };
-    
+
     // Handle suggestion click
     const handleSuggestionClick = (suggestion) => {
         onChange(suggestion);
-        setSuggestions([]);
         setShowSuggestions(false);
     };
-    
+
+    // Handle keyboard navigation
+    const [activeIndex, setActiveIndex] = useState(-1);
+    const handleKeyDown = (e) => {
+        if (!showSuggestions || suggestions.length === 0) return;
+        if (e.key === 'ArrowDown') {
+            setActiveIndex(prev => (prev + 1) % suggestions.length);
+        } else if (e.key === 'ArrowUp') {
+            setActiveIndex(prev => (prev - 1 + suggestions.length) % suggestions.length);
+        } else if (e.key === 'Enter' && activeIndex >= 0) {
+            onChange(suggestions[activeIndex]);
+            setShowSuggestions(false);
+        }
+    };
+
     return (
         <div className="autocomplete-wrapper" ref={wrapperRef}>
             <input
                 type="text"
-                className="search-input"
-                onChange={handleChange}
                 value={value}
+                onChange={e => {
+                    onChange(e.target.value);
+                    setSuggestions(getSuggestions(e.target.value));
+                    setShowSuggestions(true);
+                    setActiveIndex(-1);
+                }}
                 onFocus={() => {
-                    setInputFocus(true);
-                    if (value) {
-                        setSuggestions(getSuggestions(value));
-                        setShowSuggestions(true);
-                    }
+                    setSuggestions(getSuggestions(value));
+                    setShowSuggestions(true);
                 }}
-                onBlur={() => {
-                    setTimeout(() => setInputFocus(false), 200);
-                }}
+                onBlur={() => setTimeout(() => setShowSuggestions(false), 100)}
+                onKeyDown={handleKeyDown}
                 placeholder={placeholder}
+                className="autocomplete-input"
+                autoComplete="off"
             />
-            
-            {showSuggestions && suggestions.length > 0 && inputFocus && (
-                <ul className="suggestions-list">
-                    {suggestions.map((suggestion, index) => (
-                        <li 
-                            key={index}
-                            className="suggestion-item"
-                            onClick={() => handleSuggestionClick(suggestion)}
+            {showSuggestions && suggestions.length > 0 && (
+                <ul className="autocomplete-suggestions">
+                    {suggestions.map((suggestion, idx) => (
+                        <li
+                            key={suggestion}
+                            className={idx === activeIndex ? "active" : ""}
+                            onMouseDown={() => handleSuggestionClick(suggestion)}
                         >
                             {suggestion}
                         </li>

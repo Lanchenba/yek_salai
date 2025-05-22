@@ -3,6 +3,27 @@ import ClanFinder from "./ClanFinder";
 import ClanChecker from "./ClanChecker";
 import "./ClanApp.css";
 
+// SEO: Add meta tags for better search engine optimization
+if (typeof document !== 'undefined') {
+  document.title = 'Meitei Yek/Salai Clan Finder & Compatibility Tool';
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) {
+    metaDesc.setAttribute('content', 'Find your Meitei clan (Yek/Salai) by surname or check marriage compatibility between two surnames. Culturally accurate, fast, and easy to use.');
+  } else {
+    const meta = document.createElement('meta');
+    meta.name = 'description';
+    meta.content = 'Find your Meitei clan (Yek/Salai) by surname or check marriage compatibility between two surnames. Culturally accurate, fast, and easy to use.';
+    document.head.appendChild(meta);
+  }
+  // Add canonical link
+  if (!document.querySelector('link[rel="canonical"]')) {
+    const link = document.createElement('link');
+    link.rel = 'canonical';
+    link.href = window.location.origin + window.location.pathname;
+    document.head.appendChild(link);
+  }
+}
+
 function ClanApp() {
   const [tab, setTab] = useState("finder");
 
