@@ -479,7 +479,53 @@ body {
 
 @media (max-width: 600px) {
   .finder-card-glass, .checker-card-glass {
-    padding: 1.2rem 0.5rem;
-    min-height: 220px;
+    padding: 0.7rem 0.2rem;
+    min-height: 180px;
+    max-width: 98vw;
+    border-radius: 12px;
+  }
+  .finder-header h2, .checker-header h2 {
+    font-size: 1.05rem;
+  }
+  .finder-desc, .checker-desc {
+    font-size: 0.95rem;
+    margin-bottom: 0.7rem;
+  }
+  .finder-btn, .checker-btn {
+    font-size: 1rem;
+    padding: 0.7rem 0.5rem;
+    border-radius: 6px;
+  }
+  .autocomplete-input {
+    font-size: 1rem;
+    padding: 0.6rem 0.7rem;
+    border-radius: 6px;
+  }
+  .finder-alert, .checker-alert {
+    font-size: 0.98rem;
+    padding: 0.7rem 0.7rem 0.6rem 0.7rem;
+    border-radius: 7px;
+  }
+  .excited-message {
+    font-size: 1em;
+  }
+  .finder-hint, .checker-hint {
+    font-size: 0.92rem;
+    margin-bottom: 0.3rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .finder-card-glass, .checker-card-glass {
+    padding: 0.4rem 0.05rem;
+    min-height: 120px;
+    border-radius: 8px;
+  }
+  .finder-header h2, .checker-header h2 {
+    font-size: 0.95rem;
+  }
+  .finder-btn, .checker-btn {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.2rem;
   }
 }
