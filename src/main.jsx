@@ -1,23 +1,25 @@
-import { StrictMode } from 'react'
+import { StrictMode, Suspense, lazy } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
-import App from './App.jsx'
-import ClanFinder from './components/ClanFinder'
-import ClanChecker from './components/ClanChecker'
+import ClanApp from "./components/ClanApp";
+
+const App = lazy(() => import('./App.jsx'));
+const ClanFinder = lazy(() => import('./components/ClanFinder'));
+const ClanChecker = lazy(() => import('./components/ClanChecker'));
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Suspense fallback={<div>Loading...</div>}><ClanApp /></Suspense>,
   },
   {
     path: "/finder",
-    element: <ClanFinder />,
+    element: <Suspense fallback={<div>Loading...</div>}><ClanFinder /></Suspense>,
   },
   {
     path: "/checker",
-    element: <ClanChecker />,
+    element: <Suspense fallback={<div>Loading...</div>}><ClanChecker /></Suspense>,
   }
 ]);
 

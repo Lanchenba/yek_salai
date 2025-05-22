@@ -1,0 +1,166 @@
+.clan-app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #e0f7fa 0%, #f5f5f5 100%);
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.clan-app-header {
+  padding: 2rem 1rem 1rem 1rem;
+  text-align: center;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.clan-app-header h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: 2.2rem;
+  color: #00695c;
+  letter-spacing: 1px;
+}
+
+.clan-app-desc {
+  color: #333;
+  font-size: 1.1rem;
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+.clan-app-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  background: #e0f2f1;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #b2dfdb;
+}
+
+.clan-app-tabs button {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  color: #00796b;
+  border-radius: 20px 20px 0 0;
+  transition: background 0.2s, color 0.2s;
+}
+
+.clan-app-tabs button.active {
+  background: #fff;
+  color: #004d40;
+  font-weight: bold;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.04);
+}
+
+.clan-app-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 1rem 1rem 1rem;
+  background: none;
+}
+
+.clan-app-card {
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 22px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  padding: 2.5rem 2rem 2rem 2rem;
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+  min-height: 370px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  border: 1.5px solid rgba(0, 150, 136, 0.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: box-shadow 0.2s, border 0.2s;
+}
+
+.clan-app-card:focus-within, .clan-app-card:hover {
+  box-shadow: 0 12px 36px rgba(0,150,136,0.18);
+  border: 1.5px solid #00bfae;
+}
+
+.clan-app-card input, .clan-app-card .search-input {
+  background: rgba(255,255,255,0.85) !important;
+  color: #00695c !important;
+  border: 1.5px solid #b2dfdb !important;
+  border-radius: 8px;
+  font-size: 1.08rem;
+  padding: 0.7rem 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.clan-app-card input:focus, .clan-app-card .search-input:focus {
+  border: 1.5px solid #00bfae !important;
+  outline: none;
+  box-shadow: 0 0 0 2px #b2dfdb;
+}
+
+.clan-app-card button, .clan-app-card .button1, .clan-app-card .switch-button {
+  background: linear-gradient(90deg, #00bfae 0%, #1de9b6 100%);
+  color: #fff !important;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.08rem;
+  font-weight: 600;
+  padding: 0.8rem 1.2rem;
+  margin: 0.5rem 0 1rem 0;
+  box-shadow: 0 2px 8px rgba(0,191,174,0.08);
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+}
+
+.clan-app-card button:hover, .clan-app-card .button1:hover, .clan-app-card .switch-button:hover {
+  background: linear-gradient(90deg, #1de9b6 0%, #00bfae 100%);
+  color: #004d40 !important;
+  box-shadow: 0 4px 16px rgba(0,191,174,0.18);
+}
+
+.clan-app-card .hint, .clan-app-card .hint-prompt, .clan-app-card .hint-text {
+  color: #009688 !important;
+  font-style: italic;
+  font-size: 0.98rem;
+  margin-bottom: 0.5rem;
+}
+
+.clan-app-footer {
+  background: #e0f2f1;
+  color: #00695c;
+  text-align: center;
+  padding: 1rem 0 0.5rem 0;
+  font-size: 0.95rem;
+  border-top: 1px solid #b2dfdb;
+}
+
+.clan-app-about {
+  margin-top: 1.2rem;
+  color: #555;
+  font-size: 0.98rem;
+  background: #f7f7f7;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  display: inline-block;
+}
+
+@media (max-width: 600px) {
+  .clan-app-header h1 {
+    font-size: 1.3rem;
+  }
+  .clan-app-main {
+    padding: 1rem 0.2rem;
+  }
+  .clan-app-card {
+    padding: 1.2rem 0.5rem;
+    min-height: 250px;
+  }
+}

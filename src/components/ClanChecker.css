@@ -370,6 +370,111 @@ body {
   100% { opacity: 0.7; }
 }
 
+/* Glassmorphic styles for cards - consistent with ClanFinder */
+.finder-card-glass, .checker-card-glass {
+  background: rgba(255,255,255,0.7);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+  padding: 2.2rem 1.5rem 1.5rem 1.5rem;
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto 1.5rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border: 1.5px solid rgba(0, 150, 136, 0.13);
+  transition: box-shadow 0.2s, border 0.2s;
+}
+
+.finder-header, .checker-header {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 0.5rem;
+}
+
+.finder-header h2, .checker-header h2 {
+  font-size: 1.3rem;
+  color: #00695c;
+  margin: 0;
+  font-weight: 700;
+}
+
+.finder-desc, .checker-desc {
+  color: #333;
+  font-size: 1.02rem;
+  margin-bottom: 1.2rem;
+}
+
+.finder-btn, .checker-btn {
+  background: linear-gradient(90deg, #00bfae 0%, #1de9b6 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.08rem;
+  font-weight: 600;
+  padding: 0.8rem 1.2rem;
+  margin: 0.5rem 0 1rem 0;
+  box-shadow: 0 2px 8px rgba(0,191,174,0.08);
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+}
+
+.finder-btn:hover, .checker-btn:hover {
+  background: linear-gradient(90deg, #1de9b6 0%, #00bfae 100%);
+  color: #004d40;
+  box-shadow: 0 4px 16px rgba(0,191,174,0.18);
+}
+
+.finder-alert, .checker-alert {
+  border-radius: 10px;
+  padding: 1rem 1rem 0.8rem 1rem;
+  margin: 0.5rem 0 1rem 0;
+  font-size: 1.05rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  box-shadow: 0 2px 8px rgba(0,191,174,0.08);
+}
+
+.finder-alert.success, .checker-alert.success {
+  background: #e0f7fa;
+  color: #00695c;
+  border: 1.5px solid #00bfae;
+}
+
+.finder-alert.error, .checker-alert.error, .checker-alert.fail {
+  background: #ffebee;
+  color: #c62828;
+  border: 1.5px solid #ef5350;
+}
+
+.finder-hint, .checker-hint {
+  color: #009688;
+  font-size: 0.98rem;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+.finder-hint span, .checker-hint span {
+  background: #e0f7fa;
+  color: #00695c;
+  border-radius: 5px;
+  padding: 0 6px;
+  margin: 0 2px;
+}
+
+@media (max-width: 600px) {
+  .finder-card-glass, .checker-card-glass {
+    padding: 1.2rem 0.5rem;
+    min-height: 220px;
+  }
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   body {
