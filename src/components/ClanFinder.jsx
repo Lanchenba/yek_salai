@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Autocomplete from "./Autocomplete";
 import { surnameIndex } from "../utils/dataIndexer";
 import "./ClanFinder.css";
+
+const QUICK_SURNAMES = ["Keisham", "Oinam", "Wangkhem", "Ningthoujam"];
 
 function ClanFinder() {
   const [surname, setSurname] = useState("");
@@ -17,15 +19,13 @@ function ClanFinder() {
       return;
     }
     setLoading(true);
-    setTimeout(() => {
-      const clan = surnameIndex[surname.trim().toLowerCase()];
-      setLoading(false);
-      if (clan) {
-        setResult({ clan });
-      } else {
-        setError("No clan found for this Yumnak. Please check your spelling or try another.");
-      }
-    }, 400);
+    const clan = surnameIndex[surname.trim().toLowerCase()];
+    setLoading(false);
+    if (clan) {
+      setResult({ clan });
+    } else {
+      setError("No clan found for this Yumnak. Please check your spelling or try another.");
+    }
   };
 
   return (
@@ -34,12 +34,28 @@ function ClanFinder() {
         <span role="img" aria-label="search">🔍</span>
         <h2>Find My Clan</h2>
       </div>
-      <p className="finder-desc">Enter your Yumnak (surname) to discover your Meitei clan (Yek/Salai).</p>
+      <p className="finder-desc">Type your Yumnak to instantly see your clan (Yek/Salai).</p>
       <Autocomplete
         value={surname}
         onChange={setSurname}
         placeholder="Type your Yumnak..."
       />
+      <div className="quick-row" aria-label="Quick surname examples">
+        {QUICK_SURNAMES.map((name) => (
+          <button
+            key={name}
+            type="button"
+            className="quick-chip"
+            onClick={() => {
+              setSurname(name);
+              setError("");
+              setResult(null);
+            }}
+          >
+            {name}
+          </button>
+        ))}
+      </div>
       <button className="finder-btn" onClick={handleSearch} disabled={loading}>
         {loading ? "Searching..." : "Find Clan"}
       </button>

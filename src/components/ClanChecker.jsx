@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Autocomplete from "./Autocomplete";
 import { surnameIndex } from "../utils/dataIndexer";
 import "./ClanChecker.css";
+
+const QUICK_PAIRS = [
+  ["Keisham", "Yendrembam"],
+  ["Naorem", "Heisnam"],
+  ["Wangkhem", "Ningombam"],
+];
 
 function ClanChecker() {
   const [surname1, setSurname1] = useState("");
@@ -18,24 +24,22 @@ function ClanChecker() {
       return;
     }
     setLoading(true);
-    setTimeout(() => {
-      const clanA = surnameIndex[surname1.trim().toLowerCase()];
-      const clanB = surnameIndex[surname2.trim().toLowerCase()];
-      setLoading(false);
-      if (!clanA || !clanB) {
-        setError("Could not find one or both clans. Please check your Yumnaks.");
-      } else if (clanA === clanB) {
-        setResult({
-          compatible: false,
-          message: `Not compatible: Both belong to the ${clanA} clan.`
-        });
-      } else {
-        setResult({
-          compatible: true,
-          message: `Compatible: ${surname1} (${clanA}) and ${surname2} (${clanB}) are from different clans.`
-        });
-      }
-    }, 400);
+    const clanA = surnameIndex[surname1.trim().toLowerCase()];
+    const clanB = surnameIndex[surname2.trim().toLowerCase()];
+    setLoading(false);
+    if (!clanA || !clanB) {
+      setError("Could not find one or both clans. Please check your Yumnaks.");
+    } else if (clanA === clanB) {
+      setResult({
+        compatible: false,
+        message: `Not compatible: Both belong to the ${clanA} clan.`
+      });
+    } else {
+      setResult({
+        compatible: true,
+        message: `Compatible: ${surname1} (${clanA}) and ${surname2} (${clanB}) are from different clans.`
+      });
+    }
   };
 
   // Helper for random pair
@@ -61,7 +65,7 @@ function ClanChecker() {
         <span role="img" aria-label="check">💍</span>
         <h2>Check Clan Compatibility</h2>
       </div>
-      <p className="checker-desc">Enter two Yumnaks (surnames) to check if they are compatible for marriage (not from the same clan).</p>
+      <p className="checker-desc">Enter two Yumnaks to check whether they belong to different clans.</p>
       <Autocomplete
         value={surname1}
         onChange={setSurname1}
@@ -72,6 +76,23 @@ function ClanChecker() {
         onChange={setSurname2}
         placeholder="Second Yumnak..."
       />
+      <div className="quick-row" aria-label="Quick compatibility examples">
+        {QUICK_PAIRS.map((pair) => (
+          <button
+            key={`${pair[0]}-${pair[1]}`}
+            type="button"
+            className="quick-chip"
+            onClick={() => {
+              setSurname1(pair[0]);
+              setSurname2(pair[1]);
+              setError("");
+              setResult(null);
+            }}
+          >
+            {pair[0]} + {pair[1]}
+          </button>
+        ))}
+      </div>
       <button className="checker-btn" onClick={handleCheck} disabled={loading}>
         {loading ? "Checking..." : "Check Compatibility"}
       </button>

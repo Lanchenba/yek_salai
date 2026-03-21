@@ -1,28 +1,21 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import clansData from "../data/clans.json";
 import "./Autocomplete.css";
+
+const allSurnames = Array.from(
+    new Set(
+        Object.values(clansData).flatMap((surnames) => surnames)
+    )
+).sort((a, b) => a.localeCompare(b));
 
 function Autocomplete({ value, onChange, placeholder }) {
     const [suggestions, setSuggestions] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
-    const [inputFocus, setInputFocus] = useState(false);
     const wrapperRef = useRef(null);
-    
-    // Create a flat array of all surnames from clans.json
-    const allSurnames = useRef([]);
+    const listboxId = useRef(`suggestions-${Math.random().toString(36).slice(2)}`);
     
     useEffect(() => {
-        // Flatten the clans data into a single array of unique surnames
-        const surnames = [];
-        Object.keys(clansData).forEach(clan => {
-            clansData[clan].forEach(surname => {
-                if (!surnames.includes(surname)) {
-                    surnames.push(surname);
-                }
-            });
-        });
-        allSurnames.current = surnames.sort();
-        
         // Add click outside listener
         function handleClickOutside(event) {
             if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
@@ -42,7 +35,7 @@ function Autocomplete({ value, onChange, placeholder }) {
         const inputLength = inputValue.length;
         return inputLength === 0 
             ? [] 
-            : allSurnames.current.filter(surname => 
+            : allSurnames.filter(surname => 
                 surname.toLowerCase().slice(0, inputLength) === inputValue
             ).slice(0, 5); // Limit to 5 suggestions
     };
@@ -87,14 +80,22 @@ function Autocomplete({ value, onChange, placeholder }) {
                 placeholder={placeholder}
                 className="autocomplete-input"
                 autoComplete="off"
+                role="combobox"
+                aria-autocomplete="list"
+                aria-expanded={showSuggestions && suggestions.length > 0}
+                aria-controls={listboxId.current}
+                aria-activedescendant={activeIndex >= 0 ? `${listboxId.current}-item-${activeIndex}` : undefined}
             />
             {showSuggestions && suggestions.length > 0 && (
-                <ul className="autocomplete-suggestions">
+                <ul className="suggestions-list" role="listbox" id={listboxId.current}>
                     {suggestions.map((suggestion, idx) => (
                         <li
                             key={suggestion}
-                            className={idx === activeIndex ? "active" : ""}
+                            id={`${listboxId.current}-item-${idx}`}
+                            className={`suggestion-item ${idx === activeIndex ? "active" : ""}`}
                             onMouseDown={() => handleSuggestionClick(suggestion)}
+                            role="option"
+                            aria-selected={idx === activeIndex}
                         >
                             {suggestion}
                         </li>
@@ -104,5 +105,11 @@ function Autocomplete({ value, onChange, placeholder }) {
         </div>
     );
 }
+
+Autocomplete.propTypes = {
+    value: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    placeholder: PropTypes.string.isRequired,
+};
 
 export default Autocomplete;

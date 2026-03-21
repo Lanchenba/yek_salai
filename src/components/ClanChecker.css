@@ -1,531 +1,135 @@
-/* Center-align the entire component */
-body {
+.checker-card-glass {
+  width: 100%;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.checker-header {
   display: flex;
-  justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  gap: 0.55rem;
+}
+
+.checker-header h2 {
   margin: 0;
+  font-size: clamp(1.15rem, 1.4vw, 1.4rem);
+  color: var(--text-strong);
 }
 
-/* Main container - same styling as ClanFinder for consistency */
-.clan-finder {
-  text-align: center;
-  padding: var(--spacing-md);
-  background-color: rgba(0, 30, 0, 0.7);
-  border: 2px solid var(--primary-light);
-  box-shadow: 0 0 15px rgba(0, 255, 0, 0.5), 
-              inset 0 0 15px rgba(0, 255, 0, 0.3);
-  width: 100%;
-  max-width: 450px;
-  box-sizing: border-box;
-  margin-top: 60px;
-  position: relative;
+.checker-desc {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
 }
 
-/* Terminal header styling */
-.title {
-  font-size: var(--heading-font-size);
-  margin-bottom: var(--spacing-sm);
-  color: var(--text-color);
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  position: relative;
-  display: inline-block;
-}
-
-.title::before {
-  content: ">";
-  position: absolute;
-  left: -20px;
-  color: var(--primary-light);
-}
-
-.description {
-  font-size: var(--subheading-font-size);
-  margin-bottom: var(--spacing-md);
-  color: var(--primary-light);
-  border-bottom: 1px solid var(--primary-light);
-  padding-bottom: 10px;
-  text-transform: lowercase;
-}
-
-/* Custom input container for checker */
-.inputs-container {
+.quick-row {
   display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-md);
-  position: relative;
+  gap: 0.45rem;
+  flex-wrap: wrap;
 }
 
-.inputs-container::before {
-  content: "<COMPATIBILITY CHECK>";
-  position: absolute;
-  top: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.7rem;
-  background-color: var(--background-color);
-  padding: 0 8px;
-  color: var(--primary-light);
-  border-top: 1px solid var(--primary-light);
-  border-left: 1px solid var(--primary-light);
-  border-right: 1px solid var(--primary-light);
-}
-
-/* Terminal-style input - matching ClanFinder */
-.search-input {
-  padding: 12px;
-  font-size: var(--body-font-size);
-  font-family: var(--font-family);
-  border: 1px solid var(--primary-light);
-  background-color: rgba(0, 20, 0, 0.8);
-  color: var(--text-color);
-  box-shadow: inset 0 0 8px rgba(0, 255, 0, 0.3);
-  caret-color: var(--text-color);
-}
-
-.search-input:focus {
-  outline: none;
-  border-color: var(--text-color);
-  box-shadow: 0 0 0 2px rgba(0, 255, 0, 0.3), 
-             inset 0 0 8px rgba(0, 255, 0, 0.3);
-}
-
-.search-input::placeholder {
-  color: rgba(0, 255, 0, 0.5);
-}
-
-/* Button styling - matching ClanFinder */
-.button1 {
-  padding: 12px;
-  font-size: 16px;
-  font-family: var(--font-family);
-  background-color: var(--primary-dark);
-  color: var(--text-color);
-  border: 2px solid var(--primary-light);
-  box-shadow: 0 0 8px rgba(0, 255, 0, 0.8);
+.quick-chip {
+  border: 1px solid rgba(21, 122, 134, 0.24);
+  background: rgba(255, 255, 255, 0.9);
+  color: #1f5961;
+  border-radius: 999px;
+  padding: 0.34rem 0.62rem;
+  font-size: 0.78rem;
+  font-weight: 700;
   cursor: pointer;
-  width: 100%;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.2s ease;
+  transition: all 150ms ease;
 }
 
-.button1:hover {
-  background-color: var(--primary-color);
-  transform: translateY(-2px);
-  box-shadow: 0 0 15px rgba(0, 255, 0, 1);
+.quick-chip:hover {
+  transform: translateY(-1px);
+  background: var(--brand-soft);
+  border-color: rgba(21, 122, 134, 0.5);
 }
 
-.button1[disabled] {
-  background-color: rgba(0, 100, 0, 0.5);
+.checker-btn {
+  border: 0;
+  background: linear-gradient(135deg, #157a86, #0f6f7a);
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 0.72rem 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+}
+
+.checker-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(20, 115, 130, 0.24);
+  filter: saturate(1.06);
+}
+
+.checker-btn:disabled {
   cursor: not-allowed;
+  filter: grayscale(0.18);
+  opacity: 0.7;
 }
 
-/* Results styling - matching ClanFinder with some special effects */
-.result1 {
-  margin-top: var(--spacing-md);
-  font-weight: 500;
-  font-size: var(--subheading-font-size);
-  color: var(--text-color);
-  padding: var(--spacing-sm);
-  border: 1px dashed var(--primary-light);
-  background-color: rgba(0, 30, 0, 0.5);
-  position: relative;
+.checker-alert {
+  border-radius: 12px;
+  padding: 0.78rem 0.82rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  border: 1px solid transparent;
 }
 
-.result1::before {
-  content: "ANALYSIS:";
-  position: absolute;
-  top: -10px;
-  left: 10px;
-  font-size: 0.7em;
-  background-color: var(--background-color);
-  padding: 0 5px;
-  color: var(--primary-light);
+.checker-alert.success {
+  background: var(--success-soft);
+  color: var(--success);
+  border-color: rgba(23, 100, 78, 0.25);
 }
 
-/* Custom styles for results */
-.result-positive {
-  color: var(--success-color);
-  text-shadow: 0 0 10px var(--success-color);
-  animation: pulse-success 2s infinite;
+.checker-alert.error,
+.checker-alert.fail {
+  background: var(--danger-soft);
+  color: var(--danger);
+  border-color: rgba(184, 48, 68, 0.26);
 }
 
-.result-negative {
-  color: var(--error-color);
-  text-shadow: 0 0 10px var(--error-color);
-  animation: pulse-error 2s infinite;
+.checker-hint {
+  color: #547176;
+  font-size: 0.86rem;
 }
 
-.result-warning {
-  color: var(--accent-color);
-  text-shadow: 0 0 10px var(--accent-color);
-  animation: pulse-warning 2s infinite;
-}
-
-@keyframes pulse-success {
-  0% { text-shadow: 0 0 5px var(--success-color); }
-  50% { text-shadow: 0 0 20px var(--success-color); }
-  100% { text-shadow: 0 0 5px var(--success-color); }
-}
-
-@keyframes pulse-error {
-  0% { text-shadow: 0 0 5px var(--error-color); }
-  50% { text-shadow: 0 0 20px var(--error-color); }
-  100% { text-shadow: 0 0 5px var(--error-color); }
-}
-
-@keyframes pulse-warning {
-  0% { text-shadow: 0 0 5px var(--accent-color); }
-  50% { text-shadow: 0 0 20px var(--accent-color); }
-  100% { text-shadow: 0 0 5px var(--accent-color); }
-}
-
-.error-message {
-  color: var(--error-color);
-  margin: var(--spacing-sm) 0;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  animation: blink-error 1s infinite;
-}
-
-@keyframes blink-error {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0.5; }
-}
-
-.hint {
-  margin-top: var(--spacing-md);
-  font-size: 0.85rem;
-  color: rgba(152, 251, 152, 0.6);
-  font-style: italic;
-}
-
-/* Analysis stages */
-.analysis-stage {
-  margin: 15px 0;
-  padding: 8px;
-  background-color: rgba(0, 20, 0, 0.8);
-  border: 1px solid var(--primary-light);
-  color: var(--text-color);
-  text-align: left;
-  font-family: monospace;
-  animation: pulse-analysis 2s infinite;
-}
-
-@keyframes pulse-analysis {
-  0% { background-color: rgba(0, 20, 0, 0.8); }
-  50% { background-color: rgba(0, 40, 0, 0.8); }
-  100% { background-color: rgba(0, 20, 0, 0.8); }
-}
-
-.stage-spinner {
-  margin-right: 10px;
-  color: var(--primary-light);
-  font-size: 1.1em;
-}
-
-.stage-text {
-  letter-spacing: 0.5px;
-}
-
-/* Enhanced result styling */
-.result-header {
-  text-align: center;
-  padding: 5px 0;
-  border-bottom: 1px dashed var(--primary-light);
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 0.9em;
-}
-
-.analysis-symbol {
-  margin-right: 10px;
-  font-size: 1.2em;
-  font-weight: bold;
-}
-
-.result-content {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 5px;
-}
-
-.result-icon {
-  font-size: 1.8em;
-  filter: grayscale(30%);
-  animation: flicker-element 4s infinite;
-}
-
-@keyframes flicker-element {
-  0%, 100% { opacity: 1; filter: grayscale(30%); }
-  50% { opacity: 0.8; filter: grayscale(0%); }
-}
-
-.result-message {
-  text-align: left;
-  flex-grow: 1;
-}
-
-.result-title {
-  font-weight: bold;
-  margin-bottom: 5px;
-  letter-spacing: 1px;
-}
-
-.result-detail {
-  font-size: 1.2em;
-  margin-bottom: 5px;
-}
-
-.binary-decoration {
-  font-family: monospace;
-  opacity: 0.6;
-  font-size: 0.8em;
-  letter-spacing: 1px;
-}
-
-/* System info bar */
-.system-info {
-  margin-top: 20px;
-  font-size: 0.8rem;
-  padding: 5px;
-  background-color: rgba(0, 30, 0, 0.5);
-  border-top: 1px solid var(--primary-light);
-  color: var(--primary-light);
-  font-family: monospace;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.data-retrieval {
-  animation: blink-slow 3s infinite;
-}
-
-@keyframes blink-slow {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0.6; }
-}
-
-.system-status {
-  color: var(--success-color);
-}
-
-/* Switch button container */
-.switch-container {
-  margin-top: 20px;
-  padding: 5px 0;
-  border-top: 1px dashed var(--primary-light);
-  border-bottom: 1px dashed var(--primary-light);
-}
-
-/* Switch button styling */
-.switch-button {
-  background-color: rgba(0, 40, 0, 0.6);
-  color: var(--accent-color);
-  border: 1px solid var(--primary-light);
-  padding: 8px 15px;
-  font-family: var(--font-family);
-  font-size: 1rem;
-  cursor: pointer;
-  width: 100%;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: all 0.2s ease;
-  position: relative;
-  overflow: hidden;
-  margin: 5px 0;
-  box-shadow: inset 0 0 8px rgba(0, 255, 0, 0.2);
-}
-
-.switch-button:hover {
-  background-color: rgba(0, 60, 0, 0.8);
-  color: var(--text-color);
-  text-shadow: 0 0 5px var(--text-color);
-  box-shadow: inset 0 0 15px rgba(0, 255, 0, 0.3), 0 0 10px rgba(0, 255, 0, 0.2);
-}
-
-.switch-button:active {
-  transform: translateY(2px);
-}
-
-.switch-icon {
-  display: inline-block;
-  margin-right: 10px;
-  font-size: 1.2em;
-  transform: translateY(2px);
-  animation: pulse-icon 1.5s infinite;
-}
-
-@keyframes pulse-icon {
-  0% { opacity: 0.7; }
-  50% { opacity: 1; }
-  100% { opacity: 0.7; }
-}
-
-/* Glassmorphic styles for cards - consistent with ClanFinder */
-.finder-card-glass, .checker-card-glass {
-  background: rgba(255,255,255,0.7);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.13);
-  padding: 2.2rem 1.5rem 1.5rem 1.5rem;
-  max-width: 400px;
-  width: 100%;
-  margin: 0 auto 1.5rem auto;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  border: 1.5px solid rgba(0, 150, 136, 0.13);
-  transition: box-shadow 0.2s, border 0.2s;
-}
-
-.finder-header, .checker-header {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  margin-bottom: 0.5rem;
-}
-
-.finder-header h2, .checker-header h2 {
-  font-size: 1.3rem;
-  color: #00695c;
-  margin: 0;
+.checker-hint span {
+  color: var(--brand-strong);
   font-weight: 700;
 }
 
-.finder-desc, .checker-desc {
-  color: #333;
-  font-size: 1.02rem;
-  margin-bottom: 1.2rem;
+.excited-message {
+  margin-top: 0.35rem;
+  font-size: 0.84rem;
 }
 
-.finder-btn, .checker-btn {
-  background: linear-gradient(90deg, #00bfae 0%, #1de9b6 100%);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.08rem;
-  font-weight: 600;
-  padding: 0.8rem 1.2rem;
-  margin: 0.5rem 0 1rem 0;
-  box-shadow: 0 2px 8px rgba(0,191,174,0.08);
-  cursor: pointer;
-  letter-spacing: 1px;
-  transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+.animated-pop {
+  animation: gentle-pop 350ms ease-out;
 }
 
-.finder-btn:hover, .checker-btn:hover {
-  background: linear-gradient(90deg, #1de9b6 0%, #00bfae 100%);
-  color: #004d40;
-  box-shadow: 0 4px 16px rgba(0,191,174,0.18);
+.confetti {
+  margin-left: 0.25rem;
 }
 
-.finder-alert, .checker-alert {
-  border-radius: 10px;
-  padding: 1rem 1rem 0.8rem 1rem;
-  margin: 0.5rem 0 1rem 0;
-  font-size: 1.05rem;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  box-shadow: 0 2px 8px rgba(0,191,174,0.08);
-}
-
-.finder-alert.success, .checker-alert.success {
-  background: #e0f7fa;
-  color: #00695c;
-  border: 1.5px solid #00bfae;
-}
-
-.finder-alert.error, .checker-alert.error, .checker-alert.fail {
-  background: #ffebee;
-  color: #c62828;
-  border: 1.5px solid #ef5350;
-}
-
-.finder-hint, .checker-hint {
-  color: #009688;
-  font-size: 0.98rem;
-  font-style: italic;
-  margin-bottom: 0.5rem;
-}
-
-.finder-hint span, .checker-hint span {
-  background: #e0f7fa;
-  color: #00695c;
-  border-radius: 5px;
-  padding: 0 6px;
-  margin: 0 2px;
-}
-
-@media (max-width: 600px) {
-  .finder-card-glass, .checker-card-glass {
-    padding: 1.2rem 0.5rem;
-    min-height: 220px;
+@keyframes gentle-pop {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  body {
-    flex-direction: column;
+@media (max-width: 560px) {
+  .checker-desc {
+    font-size: 0.9rem;
   }
 
-  .clan-finder {
-    padding: var(--spacing-sm);
-    width: 90%;
-    margin-top: 50px;
-  }
-  
-  .title {
-    font-size: 2rem;
-  }
-  
-  input {
-    padding: 10px;
-  }
-  
-  .inputs-container::before {
-    font-size: 0.65rem;
-    padding: 0 5px;
-    content: "<COMPAT-CHECK>";
-  }
-}
-
-@media (max-width: 480px) {
-  body {
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .clan-finder {
-    padding: var(--spacing-sm);
-    width: 95%;
-    margin-top: 40px;
-  }
-  
-  .title {
-    font-size: 1.8rem;
-  }
-  
-  .description {
-    font-size: 1rem;
-  }
-  
-  .inputs-container::before {
-    font-size: 0.6rem;
-    padding: 0 4px;
-    content: "<CHECK>";
-    border-top: 1px solid var(--primary-light);
+  .checker-btn {
+    width: 100%;
   }
 }

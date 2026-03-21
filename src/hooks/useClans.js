@@ -37,7 +37,7 @@ export function useClans() {
                     
                     setLoading(false);
                     resolve(results);
-                } catch (err) {
+                } catch {
                     setError('An error occurred while searching');
                     setLoading(false);
                     resolve([]);
@@ -87,7 +87,7 @@ export function useClans() {
                     
                     setLoading(false);
                     resolve({ result, clans1: yek1, clans2: yek2 });
-                } catch (err) {
+                } catch {
                     setError('An error occurred while checking');
                     setLoading(false);
                     resolve({ result: '', clans1: [], clans2: [] });

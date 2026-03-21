@@ -2,165 +2,209 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, #e0f7fa 0%, #f5f5f5 100%);
-  font-family: 'Segoe UI', Arial, sans-serif;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 2.2rem 1rem 1.4rem;
+}
+
+.clan-app-container::before,
+.clan-app-container::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  z-index: 0;
+  filter: blur(20px);
+}
+
+.clan-app-container::before {
+  width: 360px;
+  height: 360px;
+  top: -140px;
+  right: -90px;
+  background: radial-gradient(circle, rgba(113, 198, 207, 0.35) 0%, rgba(113, 198, 207, 0) 70%);
+}
+
+.clan-app-container::after {
+  width: 300px;
+  height: 300px;
+  bottom: -140px;
+  left: -70px;
+  background: radial-gradient(circle, rgba(174, 224, 214, 0.34) 0%, rgba(174, 224, 214, 0) 72%);
+}
+
+.clan-app-header,
+.clan-app-tabs,
+.clan-app-main,
+.clan-app-footer {
+  position: relative;
+  z-index: 1;
+  width: min(960px, 100%);
 }
 
 .clan-app-header {
-  padding: 2rem 1rem 1rem 1rem;
   text-align: center;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  margin-bottom: 1.1rem;
+  animation: rise-in 500ms ease-out;
 }
 
 .clan-app-header h1 {
-  margin: 0 0 0.5rem 0;
-  font-size: 2.2rem;
-  color: #00695c;
-  letter-spacing: 1px;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 2.5vw, 2.7rem);
+  color: var(--text-strong);
+  letter-spacing: 0.2px;
 }
 
 .clan-app-desc {
-  color: #333;
-  font-size: 1.1rem;
-  margin: 0 auto;
-  max-width: 500px;
+  margin: 0.8rem auto 0;
+  max-width: 760px;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.clan-app-badges {
+  margin-top: 0.9rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.clan-app-badges span {
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(35, 122, 132, 0.2);
+  border-radius: 999px;
+  color: #2a4f55;
+  font-size: 0.78rem;
+  padding: 0.34rem 0.62rem;
+  font-weight: 700;
 }
 
 .clan-app-tabs {
   display: flex;
+  gap: 0.65rem;
   justify-content: center;
-  gap: 1rem;
-  background: #e0f2f1;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #b2dfdb;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
 }
 
 .clan-app-tabs button {
-  background: none;
-  border: none;
-  font-size: 1.1rem;
-  padding: 0.5rem 1.5rem;
-  cursor: pointer;
-  color: #00796b;
-  border-radius: 20px 20px 0 0;
-  transition: background 0.2s, color 0.2s;
+  border: 1px solid var(--border-soft);
+  background: rgba(255, 255, 255, 0.75);
+  color: var(--text-strong);
+  padding: 0.62rem 1.1rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.15px;
+  transition: all 180ms ease;
+}
+
+.clan-app-tabs button:hover {
+  border-color: rgba(21, 122, 134, 0.46);
+  transform: translateY(-1px);
 }
 
 .clan-app-tabs button.active {
-  background: #fff;
-  color: #004d40;
-  font-weight: bold;
-  box-shadow: 0 -2px 8px rgba(0,0,0,0.04);
+  background: linear-gradient(130deg, #0f6d79, #1a8a7f);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 10px 24px rgba(20, 117, 116, 0.24);
 }
 
 .clan-app-main {
-  flex: 1;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  padding: 2rem 1rem 1rem 1rem;
-  background: none;
 }
 
 .clan-app-card {
-  background: rgba(255, 255, 255, 0.65);
-  border-radius: 22px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-  padding: 2.5rem 2rem 2rem 2rem;
-  max-width: 420px;
-  width: 100%;
-  margin: 0 auto;
-  min-height: 370px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
-  border: 1.5px solid rgba(0, 150, 136, 0.18);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transition: box-shadow 0.2s, border 0.2s;
+  width: min(640px, 100%);
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 24px;
+  padding: clamp(1rem, 2.8vw, 1.7rem);
+  box-shadow: 0 24px 50px rgba(15, 47, 52, 0.13);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: rise-in 620ms ease-out;
 }
 
-.clan-app-card:focus-within, .clan-app-card:hover {
-  box-shadow: 0 12px 36px rgba(0,150,136,0.18);
-  border: 1.5px solid #00bfae;
-}
-
-.clan-app-card input, .clan-app-card .search-input {
-  background: rgba(255,255,255,0.85) !important;
-  color: #00695c !important;
-  border: 1.5px solid #b2dfdb !important;
-  border-radius: 8px;
-  font-size: 1.08rem;
-  padding: 0.7rem 1rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  transition: border 0.2s, box-shadow 0.2s;
-}
-
-.clan-app-card input:focus, .clan-app-card .search-input:focus {
-  border: 1.5px solid #00bfae !important;
-  outline: none;
-  box-shadow: 0 0 0 2px #b2dfdb;
-}
-
-.clan-app-card button, .clan-app-card .button1, .clan-app-card .switch-button {
-  background: linear-gradient(90deg, #00bfae 0%, #1de9b6 100%);
-  color: #fff !important;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.08rem;
-  font-weight: 600;
-  padding: 0.8rem 1.2rem;
-  margin: 0.5rem 0 1rem 0;
-  box-shadow: 0 2px 8px rgba(0,191,174,0.08);
-  cursor: pointer;
-  letter-spacing: 1px;
-  transition: background 0.2s, box-shadow 0.2s, color 0.2s;
-}
-
-.clan-app-card button:hover, .clan-app-card .button1:hover, .clan-app-card .switch-button:hover {
-  background: linear-gradient(90deg, #1de9b6 0%, #00bfae 100%);
-  color: #004d40 !important;
-  box-shadow: 0 4px 16px rgba(0,191,174,0.18);
-}
-
-.clan-app-card .hint, .clan-app-card .hint-prompt, .clan-app-card .hint-text {
-  color: #009688 !important;
-  font-style: italic;
-  font-size: 0.98rem;
-  margin-bottom: 0.5rem;
+.clan-app-tip {
+  background: linear-gradient(130deg, rgba(233, 246, 247, 0.92), rgba(229, 240, 240, 0.92));
+  color: #255158;
+  border: 1px solid rgba(35, 122, 132, 0.22);
+  border-radius: 12px;
+  font-size: 0.9rem;
+  padding: 0.6rem 0.72rem;
+  margin-bottom: 0.85rem;
+  animation: fade-shift 260ms ease-out;
 }
 
 .clan-app-footer {
-  background: #e0f2f1;
-  color: #00695c;
+  margin-top: 1.3rem;
   text-align: center;
-  padding: 1rem 0 0.5rem 0;
-  font-size: 0.95rem;
-  border-top: 1px solid #b2dfdb;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(35, 122, 132, 0.17);
+  border-radius: 18px;
+  padding: 0.9rem 1rem;
+}
+
+.clan-app-footer-links {
+  margin-top: 0.5rem;
 }
 
 .clan-app-about {
-  margin-top: 1.2rem;
-  color: #555;
-  font-size: 0.98rem;
-  background: #f7f7f7;
-  border-radius: 8px;
-  padding: 0.7rem 1rem;
-  display: inline-block;
+  margin-top: 0.75rem;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(35, 122, 132, 0.14);
+  border-radius: 12px;
+  padding: 0.6rem 0.75rem;
 }
 
-@media (max-width: 600px) {
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-shift {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .clan-app-container {
+    padding-top: 1.2rem;
+  }
+
   .clan-app-header h1 {
-    font-size: 1.3rem;
+    line-height: 1.15;
   }
-  .clan-app-main {
-    padding: 1rem 0.2rem;
+
+  .clan-app-desc {
+    font-size: 0.93rem;
   }
-  .clan-app-card {
-    padding: 1.2rem 0.5rem;
-    min-height: 250px;
+
+  .clan-app-tabs {
+    gap: 0.5rem;
+  }
+
+  .clan-app-tabs button {
+    width: calc(50% - 0.35rem);
+    min-width: 152px;
   }
 }

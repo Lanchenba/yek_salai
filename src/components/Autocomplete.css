@@ -3,66 +3,67 @@
   width: 100%;
 }
 
-/* Terminal-style suggestions dropdown */
+.autocomplete-input {
+  width: 100%;
+  border: 1px solid var(--border-soft);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 0.72rem 0.88rem;
+  color: var(--text-strong);
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.autocomplete-input::placeholder {
+  color: #7c8e95;
+}
+
+.autocomplete-input:focus {
+  border-color: rgba(21, 122, 134, 0.6);
+  box-shadow: 0 0 0 4px rgba(49, 143, 153, 0.17);
+}
+
 .suggestions-list {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 0.35rem);
   left: 0;
   right: 0;
   margin: 0;
-  padding: 0;
-  background-color: rgba(0, 40, 0, 0.95);
-  border: 1px solid var(--primary-light);
-  border-top: none;
-  max-height: 150px;
+  padding: 0.3rem;
+  list-style: none;
+  background: #ffffff;
+  border: 1px solid rgba(35, 122, 132, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 16px 28px rgba(19, 49, 53, 0.15);
+  z-index: 20;
+  max-height: 220px;
   overflow-y: auto;
-  z-index: 5;
-  list-style-type: none;
-  box-shadow: 0 5px 10px rgba(0, 255, 0, 0.3);
 }
 
-/* Custom scrollbar for the dropdown */
 .suggestions-list::-webkit-scrollbar {
   width: 8px;
 }
 
 .suggestions-list::-webkit-scrollbar-track {
-  background: rgba(0, 40, 0, 0.5);
+  background: #eff4f6;
+  border-radius: 99px;
 }
 
 .suggestions-list::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: 0;
-}
-
-.suggestions-list::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-light);
+  background: #b4c5cb;
+  border-radius: 99px;
 }
 
 .suggestion-item {
-  padding: 10px;
   cursor: pointer;
-  color: var(--text-color);
-  text-align: left;
-  border-bottom: 1px dashed rgba(152, 251, 152, 0.2);
-  transition: all 0.2s;
-  font-family: var(--font-family);
+  border-radius: 8px;
+  padding: 0.56rem 0.64rem;
+  color: var(--text-strong);
+  transition: background-color 160ms ease, color 160ms ease;
 }
 
-.suggestion-item:hover {
-  background-color: rgba(0, 100, 0, 0.7);
-  color: var(--primary-light);
-  text-shadow: 0 0 5px var(--text-color);
-  padding-left: 15px;
-}
-
-.suggestion-item::before {
-  content: "> ";
-  color: var(--primary-light);
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-.suggestion-item:hover::before {
-  opacity: 1;
+.suggestion-item:hover,
+.suggestion-item.active {
+  background: var(--brand-soft);
+  color: var(--brand-strong);
 }

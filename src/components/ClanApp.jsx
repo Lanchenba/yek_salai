@@ -1,51 +1,81 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import ClanFinder from "./ClanFinder";
 import ClanChecker from "./ClanChecker";
 import "./ClanApp.css";
 
-// SEO: Add meta tags for better search engine optimization
-if (typeof document !== 'undefined') {
-  document.title = 'Meitei Yek/Salai Clan Finder & Compatibility Tool';
-  const metaDesc = document.querySelector('meta[name="description"]');
-  if (metaDesc) {
-    metaDesc.setAttribute('content', 'Find your Meitei clan (Yek/Salai) by surname or check marriage compatibility between two surnames. Culturally accurate, fast, and easy to use.');
-  } else {
-    const meta = document.createElement('meta');
-    meta.name = 'description';
-    meta.content = 'Find your Meitei clan (Yek/Salai) by surname or check marriage compatibility between two surnames. Culturally accurate, fast, and easy to use.';
-    document.head.appendChild(meta);
-  }
-  // Add canonical link
-  if (!document.querySelector('link[rel="canonical"]')) {
-    const link = document.createElement('link');
-    link.rel = 'canonical';
-    link.href = window.location.origin + window.location.pathname;
-    document.head.appendChild(link);
-  }
+function pathToTab(pathname) {
+  return pathname === "/checker" ? "checker" : "finder";
 }
 
 function ClanApp() {
-  const [tab, setTab] = useState("finder");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [tab, setTab] = useState(() => pathToTab(window.location.pathname));
+
+  useEffect(() => {
+    setTab(pathToTab(location.pathname));
+  }, [location.pathname]);
+
+  useEffect(() => {
+    document.title = "Meitei Yek/Salai Clan Finder & Compatibility Tool";
+    const description = "Find your Meitei clan (Yek/Salai) by surname or check marriage compatibility between two surnames. Culturally accurate, fast, and easy to use.";
+    const metaDesc = document.querySelector('meta[name="description"]');
+
+    if (metaDesc) {
+      metaDesc.setAttribute("content", description);
+    } else {
+      const meta = document.createElement("meta");
+      meta.name = "description";
+      meta.content = description;
+      document.head.appendChild(meta);
+    }
+
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.rel = "canonical";
+      document.head.appendChild(canonical);
+    }
+    canonical.href = window.location.origin + window.location.pathname;
+  }, [location.pathname]);
+
+  const handleTabChange = (nextTab) => {
+    setTab(nextTab);
+    if (nextTab === "checker") {
+      navigate("/checker");
+      return;
+    }
+
+    if (location.pathname !== "/") {
+      navigate("/finder");
+    }
+  };
 
   return (
     <div className="clan-app-container">
       <header className="clan-app-header">
         <h1>Meitei Yek/Salai Community Tool</h1>
         <p className="clan-app-desc">
-          <strong>Welcome!</strong> This tool helps you discover your clan (Yek/Salai) or check marriage compatibility within the Meitei community. Enter your surname (Yumnak) to find your clan, or check if two surnames are compatible for marriage.
+          <strong>Welcome!</strong> Discover your clan in seconds or check compatibility with clarity. Built for the Meitei community with a calm, guided flow.
         </p>
+        <div className="clan-app-badges" aria-label="Tool highlights">
+          <span>Fast lookup</span>
+          <span>Cultural context</span>
+          <span>Mobile friendly</span>
+        </div>
       </header>
       <nav className="clan-app-tabs" aria-label="Main functions">
         <button
           className={tab === "finder" ? "active" : ""}
-          onClick={() => setTab("finder")}
+          onClick={() => handleTabChange("finder")}
           aria-selected={tab === "finder"}
         >
           <span role="img" aria-label="search">🔍</span> Find My Clan
         </button>
         <button
           className={tab === "checker" ? "active" : ""}
-          onClick={() => setTab("checker")}
+          onClick={() => handleTabChange("checker")}
           aria-selected={tab === "checker"}
         >
           <span role="img" aria-label="check">💍</span> Check Compatibility
@@ -53,6 +83,11 @@ function ClanApp() {
       </nav>
       <main className="clan-app-main">
         <div className="clan-app-card">
+          <section className="clan-app-tip" aria-live="polite">
+            {tab === "finder"
+              ? "Tip: Start typing your surname and pick from suggestions for fastest results."
+              : "Tip: Use known family surnames for both fields to get an accurate compatibility check."}
+          </section>
           {tab === "finder" && <ClanFinder />}
           {tab === "checker" && <ClanChecker />}
         </div>
