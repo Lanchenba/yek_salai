@@ -18,27 +18,13 @@ function ClanApp() {
   }, [location.pathname]);
 
   useEffect(() => {
-    document.title = "Meitei Yek/Salai Clan Finder & Compatibility Tool";
-    const description = "Find your Meitei clan (Yek/Salai) by surname or check marriage compatibility between two surnames. Culturally accurate, fast, and easy to use.";
-    const metaDesc = document.querySelector('meta[name="description"]');
+    const titles = {
+      finder: "Find My Clan | Yek Salai — Meitei Clan Finder",
+      checker: "Check Compatibility | Yek Salai — Meitei Clan Checker",
+    };
+    document.title = titles[tab] ?? "Yek Salai | Meitei Clan Finder & Compatibility Checker";
+  }, [tab]);
 
-    if (metaDesc) {
-      metaDesc.setAttribute("content", description);
-    } else {
-      const meta = document.createElement("meta");
-      meta.name = "description";
-      meta.content = description;
-      document.head.appendChild(meta);
-    }
-
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement("link");
-      canonical.rel = "canonical";
-      document.head.appendChild(canonical);
-    }
-    canonical.href = window.location.origin + window.location.pathname;
-  }, [location.pathname]);
 
   const handleTabChange = (nextTab) => {
     setTab(nextTab);
