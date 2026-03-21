@@ -175,6 +175,43 @@
   -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 
+.clan-app-credit {
+  margin-top: 0.75rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.credit-heart {
+  display: inline-block;
+  animation: heartbeat 1.4s ease infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14%       { transform: scale(1.25); }
+  28%       { transform: scale(1); }
+  42%       { transform: scale(1.15); }
+  56%       { transform: scale(1); }
+}
+
+.credit-link {
+  color: var(--brand-strong);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(21, 122, 134, 0.45);
+  transition: color 150ms, border-color 150ms;
+}
+
+.credit-link:hover {
+  color: #0d6e7e;
+  border-bottom-style: solid;
+}
+
 @keyframes rise-in {
   from {
     opacity: 0;

@@ -102,6 +102,17 @@ function ClanApp() {
         <div className="clan-app-about">
           <strong>About:</strong> In Meitei tradition, marriage within the same clan (Yek/Salai) is not permitted. This tool helps you respect and understand this important cultural practice.
         </div>
+        <div className="clan-app-credit">
+          Made with <span className="credit-heart" role="img" aria-label="love">❤️</span> by{" "}
+          <a
+            href="https://www.instagram.com/keisham.jpeg"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="credit-link"
+          >
+            Lans Meitei
+          </a>
+        </div>
       </footer>
     </div>
   );
