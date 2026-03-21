@@ -2,6 +2,12 @@
   width: 100%;
   display: grid;
   gap: 0.85rem;
+  background: rgba(255, 255, 255, 0.38);
+  border: 1px solid rgba(35, 122, 132, 0.12);
+  border-radius: 14px;
+  padding: 0.75rem;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 
 .finder-header {
@@ -38,6 +44,8 @@
   font-weight: 700;
   cursor: pointer;
   transition: all 150ms ease;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 
 .quick-chip:hover {
@@ -78,15 +86,19 @@
 }
 
 .finder-alert.success {
-  background: var(--success-soft);
+  background: rgba(233, 248, 242, 0.8);
   color: var(--success);
   border-color: rgba(23, 100, 78, 0.25);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 
 .finder-alert.error {
-  background: var(--danger-soft);
+  background: rgba(254, 236, 239, 0.86);
   color: var(--danger);
   border-color: rgba(184, 48, 68, 0.26);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 
 .finder-hint {
@@ -99,28 +111,222 @@
   font-weight: 700;
 }
 
-.excited-message {
-  margin-top: 0.35rem;
-  font-size: 0.84rem;
+/* ── Confetti burst ─────────────────────────────────────── */
+.confetti-wrapper {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -14px;
+  border-radius: 2px;
+  opacity: 0;
+  animation: confetti-fall linear forwards;
+}
+
+@keyframes confetti-fall {
+  0%   { transform: translateY(0)    rotate(0deg)   scaleX(1);  opacity: 1; }
+  70%  { opacity: 0.85; }
+  100% { transform: translateY(340px) rotate(600deg) scaleX(-1); opacity: 0; }
+}
+
+/* ── Popup backdrop ─────────────────────────────────────── */
+.found-popup-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 26, 30, 0.52);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+  padding: 1rem;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: backdrop-in 250ms ease both;
+}
+
+@keyframes backdrop-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Popup card ─────────────────────────────────────────── */
+.found-popup-card {
+  width: min(460px, 100%);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(23, 100, 78, 0.18);
+  border-radius: 20px;
+  box-shadow: 0 32px 72px rgba(14, 50, 55, 0.3), 0 0 0 1px rgba(255,255,255,0.6) inset;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .animated-pop {
-  animation: gentle-pop 350ms ease-out;
+  animation: spring-pop 420ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
-.confetti {
-  margin-left: 0.25rem;
+@keyframes spring-pop {
+  from { opacity: 0; transform: scale(0.82); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
-@keyframes gentle-pop {
-  from {
-    opacity: 0;
-    transform: translateY(6px) scale(0.99);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+/* ── Ribbon banner ──────────────────────────────────────── */
+.popup-ribbon {
+  background: linear-gradient(90deg, #0d8f7a, #157a86, #129275);
+  background-size: 200% 100%;
+  animation: ribbon-shimmer 2.4s ease infinite;
+  color: #fff;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.55rem 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes ribbon-shimmer {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+
+/* ── Popup body padding ─────────────────────────────────── */
+.popup-body {
+  padding: 1rem 1.1rem 1.1rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Close button ───────────────────────────────────────── */
+.found-popup-close {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.55rem;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.35);
+  color: #fff;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+  transition: background 150ms;
+}
+
+.found-popup-close:hover {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+/* ── Found header ───────────────────────────────────────── */
+.found-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  color: #135d52;
+}
+
+/* ── Clan name badge ────────────────────────────────────── */
+.found-clan-name {
+  margin-top: 0.7rem;
+  display: inline-block;
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  padding: 0.3rem 1rem;
+  border-radius: 999px;
+  color: #0a4a3b;
+  background: linear-gradient(135deg, rgba(20,184,166,0.14), rgba(16,185,129,0.18));
+  border: 2px solid rgba(23, 100, 78, 0.28);
+  position: relative;
+  overflow: hidden;
+}
+
+/* shimmer sweep across the badge */
+.found-clan-name::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.65), transparent);
+  animation: shimmer-sweep 1.1s ease 0.55s forwards;
+}
+
+@keyframes shimmer-sweep {
+  from { left: -70%; }
+  to   { left: 130%; }
+}
+
+/* ── Subline & message ──────────────────────────────────── */
+.found-subline {
+  margin-top: 0.55rem;
+  color: #2f5f52;
+  font-size: 0.88rem;
+}
+
+.excited-message {
+  margin-top: 0.4rem;
+  font-size: 0.83rem;
+  color: #3b7060;
+  line-height: 1.45;
+}
+
+/* ── Action buttons ─────────────────────────────────────── */
+.found-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.found-action-btn {
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #157a86, #129275);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+  flex: 1 1 auto;
+}
+
+.found-action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(18, 134, 124, 0.28);
+}
+
+.found-action-btn.secondary {
+  background: rgba(255, 255, 255, 0.88);
+  color: #1f5961;
+  border: 1px solid rgba(21, 122, 134, 0.28);
+}
+
+/* ── Staggered entrance ─────────────────────────────────── */
+.fade-up {
+  animation: fade-up-in 380ms cubic-bezier(0.34, 1.4, 0.64, 1) both;
+}
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+
+@keyframes fade-up-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
 }
 
 @media (max-width: 560px) {

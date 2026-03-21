@@ -46,6 +46,7 @@
   text-align: center;
   margin-bottom: 1.1rem;
   animation: rise-in 500ms ease-out;
+  padding: 0.3rem 0.8rem 0.8rem;
 }
 
 .clan-app-header h1 {
@@ -79,6 +80,8 @@
   font-size: 0.78rem;
   padding: 0.34rem 0.62rem;
   font-weight: 700;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 
 .clan-app-tabs {
@@ -99,6 +102,8 @@
   font-weight: 700;
   letter-spacing: 0.15px;
   transition: all 180ms ease;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 
 .clan-app-tabs button:hover {
@@ -125,8 +130,8 @@
   border-radius: 24px;
   padding: clamp(1rem, 2.8vw, 1.7rem);
   box-shadow: 0 24px 50px rgba(15, 47, 52, 0.13);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   animation: rise-in 620ms ease-out;
 }
 
@@ -139,6 +144,8 @@
   padding: 0.6rem 0.72rem;
   margin-bottom: 0.85rem;
   animation: fade-shift 260ms ease-out;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 
 .clan-app-footer {
@@ -150,6 +157,8 @@
   border: 1px solid rgba(35, 122, 132, 0.17);
   border-radius: 18px;
   padding: 0.9rem 1rem;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 
 .clan-app-footer-links {
@@ -162,6 +171,8 @@
   border: 1px solid rgba(35, 122, 132, 0.14);
   border-radius: 12px;
   padding: 0.6rem 0.75rem;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 
 @keyframes rise-in {

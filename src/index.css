@@ -15,6 +15,7 @@
   --danger-soft: #feecef;
   --success: #17644e;
   --success-soft: #e9f8f2;
+  --glass-blur: 7px;
 }
 
 * {
