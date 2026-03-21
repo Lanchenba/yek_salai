@@ -51,8 +51,9 @@ function ClanApp() {
           <span>Mobile friendly</span>
         </div>
       </header>
-      <nav className="clan-app-tabs" aria-label="Main functions">
+      <nav className="clan-app-tabs" role="tablist" aria-label="Main functions">
         <button
+          role="tab"
           className={tab === "finder" ? "active" : ""}
           onClick={() => handleTabChange("finder")}
           aria-selected={tab === "finder"}
@@ -60,6 +61,7 @@ function ClanApp() {
           <span role="img" aria-label="search">🔍</span> Find My Clan
         </button>
         <button
+          role="tab"
           className={tab === "checker" ? "active" : ""}
           onClick={() => handleTabChange("checker")}
           aria-selected={tab === "checker"}

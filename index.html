@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#157a86" />
 
+    <!-- Google Fonts: preconnect first, then non-blocking stylesheet -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" />
+
     <!-- Primary SEO -->
     <title>Yek Salai | Meitei Clan Finder &amp; Marriage Compatibility Checker</title>
     <meta name="description" content="Find your Meitei Yek or Salai clan by surname and check whether two Meitei surnames are compatible for marriage. Fast, accurate, and free clan lookup for the Meitei community of Manipur." />
@@ -12,6 +17,7 @@
     <meta name="author" content="Lans Meitei" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://yek-salai.vercel.app/" />
+    <meta name="google-site-verification" content="HHqGMLUw6h7xvWhiJ5evFIkfwKWIt9wd1Aax3cbmBA4" />
 
     <!-- Geo targeting: Manipur, India -->
     <meta name="geo.region" content="IN-MN" />
@@ -34,10 +40,43 @@
     <meta name="twitter:title" content="Yek Salai | Meitei Clan Finder" />
     <meta name="twitter:description" content="Find your Meitei Yek/Salai clan by surname or check marriage compatibility. Free &amp; accurate cultural tool for the Meitei community." />
     <meta name="twitter:image" content="https://yek-salai.vercel.app/og-image.png" />
+    <meta name="twitter:creator" content="@keisham.jpeg" />
 
     <!-- Icons -->
     <link rel="icon" type="image/svg+xml" href="./src/assets/love-svgrepo-com.svg" />
     <link rel="apple-touch-icon" href="./src/assets/love-svgrepo-com.svg" />
+
+    <!-- Structured data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Yek Salai",
+      "url": "https://yek-salai.vercel.app/",
+      "description": "A free web tool to find your Meitei clan (Yek or Salai) by surname and check whether two Meitei surnames are compatible for marriage, based on traditional Meitei cultural practices.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Person",
+        "name": "Lans Meitei",
+        "sameAs": "https://www.instagram.com/keisham.jpeg"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR"
+      },
+      "keywords": "yek salai, Meitei clan, Meitei marriage compatibility, Manipur culture"
+    }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+
 
     <!-- Structured data (JSON-LD) -->
     <script type="application/ld+json">
